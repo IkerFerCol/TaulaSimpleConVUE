@@ -1,0 +1,19 @@
+* {
+    font-family: "JetBrains Mono Thin", fantasy;
+}
+
+h1 {
+    text-align: center;
+    color: #0029ff;
+}
+li{
+    margin: auto;
+    display: table;
+    color: white;
+    width: 50%;
+    border-spacing: 20px;
+    background-color: #bb0002;
+    border: 2px #ff0002 solid;
+    font-style: italic;
+    text-align: center;
+}
