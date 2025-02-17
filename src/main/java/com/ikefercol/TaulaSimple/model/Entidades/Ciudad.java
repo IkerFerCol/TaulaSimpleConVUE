@@ -1,5 +1,7 @@
 package com.ikefercol.TaulaSimple.model.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,12 +17,14 @@ public class Ciudad {
     String imagen;
     int poblacion;
 
+    @JsonIgnoreProperties("ciudades") // Evita la recursion infinita, NO serializamos el campo "ciudades" de 'Provincias'
     @ManyToMany(mappedBy = "ciudades")
     List<Franquicia> franquicias;
 
+    @JsonIgnoreProperties("ciudades") // Evita la recursion infinita, NO serializamos el campo "ciudades" de 'Provincias'
     @ManyToOne
-    @JoinColumn(name = "PROVINCIA_ID", nullable = false)
-    Provincia provincia_id;
+    @JoinColumn(name = "PROVINCIA_ID", nullable = true)
+    private Provincia provincia_id;
 
     public Ciudad() {}
 
@@ -91,4 +95,16 @@ public class Ciudad {
     }
 
 
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", poblacion=" + poblacion +
+                ", franquicias=" + franquicias +
+                ", provincia_id=" + provincia_id +
+                '}';
+    }
 }

@@ -1,5 +1,9 @@
 package com.ikefercol.TaulaSimple.controller;
 
+import com.ikefercol.TaulaSimple.model.Entidades.Ciudad;
+import com.ikefercol.TaulaSimple.model.Entidades.Franquicia;
+import com.ikefercol.TaulaSimple.model.Entidades.Pais;
+import com.ikefercol.TaulaSimple.model.Entidades.Provincia;
 import com.ikefercol.TaulaSimple.model.Repositorios.CiudadRepository;
 import com.ikefercol.TaulaSimple.model.Repositorios.FranquiciaRepository;
 import com.ikefercol.TaulaSimple.model.Repositorios.PaisRepository;
@@ -8,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8082", allowedHeaders = "*", methods = {RequestMethod.GET,RequestMethod.POST})
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/total")
+@RequestMapping("/ciudads")
 public class TotalRestController {
 
     @Autowired
@@ -25,28 +30,75 @@ public class TotalRestController {
     @Autowired
     ProvinciaRepository provinciaRepository;
 
-    @GetMapping(name = "/ciudad")
-    public String getCiudades(Model model){
-        model.addAttribute("ciudad", ciudadRepository.findAll());
-        return "ciudades";
+
+    @GetMapping("/ciudades")
+    public List<Ciudad> getCiudades() {
+        return ciudadRepository.findAll();
     }
 
-    @GetMapping("/franquicia")
-    public String getFranquicia(Model model){
-        model.addAttribute("franquicia", franquiciaRepository.findAll());
-        return "franquicias";
+
+    @PostMapping("/ciudades")
+    public void createCiudad(@RequestBody Ciudad ciudad) {
+        ciudadRepository.save(ciudad);
     }
 
-    @GetMapping("/pais")
-    public String getPais(Model model){
-        model.addAttribute("pais", paisRepository.findAll());
-        return "paises";
+    @DeleteMapping("/ciudades/{id}")
+    public String deleteCiudad(@PathVariable Long id) {
+        ciudadRepository.deleteById(id);
+        return "Ciudad borrada";
     }
 
-    @GetMapping("/provincia")
-    public String getProvincias(Model model){
-        model.addAttribute("provincia", provinciaRepository.findAll());
-        return "provincias";
+    @GetMapping("/provincias")
+    public List<Provincia> getProvincias() {
+        return provinciaRepository.findAll();
     }
+
+
+    @PostMapping("/provincias")
+    public void createProvincia(@RequestBody Provincia provincia) {
+        provinciaRepository.save(provincia);
+    }
+
+    @DeleteMapping("/provincias/{id}")
+    public String deleteProvincias(@PathVariable Long id) {
+        provinciaRepository.deleteById(id);
+        return "Provincia borrada";
+    }
+
+    @GetMapping("/paises")
+    public List<Pais> getPaises() {
+        return paisRepository.findAll();
+    }
+
+
+    @PostMapping("/paises")
+    public void createPais(@RequestBody Pais pais) {
+        paisRepository.save(pais);
+    }
+
+    @DeleteMapping("/paises/{id}")
+    public String deletePais(@PathVariable Long id) {
+        paisRepository.deleteById(id);
+        return "Pais borrada";
+    }
+
+
+    @GetMapping("/franquicias")
+    public List<Franquicia> getFranquicia() {
+        return franquiciaRepository.findAll();
+    }
+
+    @PostMapping("/franquicias")
+    public void createFranquicia(@RequestBody Franquicia franquicia) {
+        franquiciaRepository.save(franquicia);
+    }
+
+    @DeleteMapping("/franquicias/{id}")
+    public String deleteFranquicias(@PathVariable Long id) {
+        ciudadRepository.deleteById(id);
+        return "Franquicia borrada";
+    }
+
+
 
 }

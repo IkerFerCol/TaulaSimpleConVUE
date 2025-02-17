@@ -1,5 +1,6 @@
 package com.ikefercol.TaulaSimple.model.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class Pais {
     long id;
     String nom;
 
+    @JsonIgnoreProperties("pais_id") // Evita la recursion infinita, NO serializamos el campo "ciudades" de 'Provincias'
     @OneToMany(mappedBy = "pais_id", cascade = CascadeType.ALL)
     List<Provincia> provincias;
 

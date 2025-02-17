@@ -1,5 +1,6 @@
 package com.ikefercol.TaulaSimple.model.Entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class Franquicia {
     private long id;
     private String nom;
 
+    @JsonIgnoreProperties("franquicias") // Evita la recursion infinita, NO serializamos el campo "ciudades" de 'Provincias'
     @ManyToMany
     @JoinTable(
             name = "CIUDAD_FRANQUICIA",
