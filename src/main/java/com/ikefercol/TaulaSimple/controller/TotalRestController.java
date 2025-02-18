@@ -95,7 +95,7 @@ public class TotalRestController {
 
     @DeleteMapping("/franquicias/{id}")
     public String deleteFranquicias(@PathVariable Long id) {
-        ciudadRepository.deleteById(id);
+        franquiciaRepository.deleteById(id);
         return "Franquicia borrada";
     }
 
