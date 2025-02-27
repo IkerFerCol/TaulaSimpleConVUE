@@ -15,11 +15,7 @@ public class Franquicia {
 
     @JsonIgnoreProperties("franquicias") // Evita la recursion infinita, NO serializamos el campo "ciudades" de 'Provincias'
     @ManyToMany
-    @JoinTable(
-            name = "CIUDAD_FRANQUICIA",
-            joinColumns = @JoinColumn(name = "franquicia_id"),
-            inverseJoinColumns = @JoinColumn(name = "ciudad_id")
-    )
+    @JoinTable(name = "CIUDAD_FRANQUICIA", joinColumns = @JoinColumn(name = "franquicia_id"), inverseJoinColumns = @JoinColumn(name = "ciudad_id"))
     private List<Ciudad> ciudades;
 
     public Franquicia(long id, String nom, List<Ciudad> ciudades) {
